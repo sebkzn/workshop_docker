@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  web:
+    build: ./web/.
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - postgre
+  words:
+    build: ./words/.
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - postgre
+  db:
+    build: ./db/.
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - postgre
+    environment:
+      - DATABASE_HOST=127.0.0.1
+
+networks:
+  postgre:
